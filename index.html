@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Prism — Provider-Led AI Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #0ea5e9;
+      --accent: #10b981;
+      --dark: #0f172a;
+      --gray-900: #1e293b;
+      --gray-700: #334155;
+      --gray-500: #64748b;
+      --gray-300: #cbd5e1;
+      --gray-100: #f1f5f9;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--dark);
+      color: var(--gray-100);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 80px 0 60px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--dark) 0%, var(--gray-900) 100%);
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--primary);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--white) 0%, var(--gray-300) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 1.35rem;
+      color: var(--gray-500);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      font-weight: 400;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      color: var(--gray-100);
+      border: 1px solid var(--gray-700);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--gray-500);
+    }
+
+    /* Core Concept */
+    .core-concept {
+      padding: 80px 0;
+      background: var(--gray-900);
+    }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .concept-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    .concept-text h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+
+    .concept-text p {
+      color: var(--gray-300);
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+    }
+
+    .concept-visual {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 16px;
+      padding: 40px;
+    }
+
+    .analogy {
+      text-align: center;
+    }
+
+    .analogy-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .analogy-item:last-child {
+      border-bottom: none;
+    }
+
+    .analogy-label {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      width: 120px;
+      text-align: right;
+    }
+
+    .analogy-value {
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    /* Three Layers */
+    .layers-section {
+      padding: 80px 0;
+      background: var(--dark);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-header h2 {
+      font-size: 2.25rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      color: var(--gray-500);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .layers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .layers-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .layer-card {
+      background: var(--gray-900);
+      border: 1px solid var(--gray-700);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .layer-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .layer-card.foundation::before {
+      background: linear-gradient(90deg, #ef4444, #f97316);
+    }
+
+    .layer-card.provider::before {
+      background: linear-gradient(90deg, var(--primary), #8b5cf6);
+    }
+
+    .layer-card.patient::before {
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+    }
+
+    .layer-number {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray-500);
+      margin-bottom: 12px;
+    }
+
+    .layer-card h3 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .layer-card p {
+      color: var(--gray-300);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .layer-items {
+      list-style: none;
+    }
+
+    .layer-items li {
+      color: var(--gray-400);
+      font-size: 0.9rem;
+      padding: 8px 0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .layer-items li::before {
+      content: '→';
+      color: var(--gray-500);
+    }
+
+    /* Modules */
+    .modules-section {
+      padding: 80px 0;
+      background: var(--gray-900);
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .modules-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .modules-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .module-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--gray-700);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s ease;
+    }
+
+    .module-card:hover {
+      border-color: var(--primary);
+      background: rgba(99, 102, 241, 0.05);
+    }
+
+    .module-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(99, 102, 241, 0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 1.2rem;
+    }
+
+    .module-card h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .module-card p {
+      font-size: 0.9rem;
+      color: var(--gray-400);
+    }
+
+    /* Differentiator */
+    .diff-section {
+      padding: 80px 0;
+      background: var(--dark);
+    }
+
+    .diff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .diff-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .diff-card {
+      padding: 32px;
+      border-radius: 16px;
+    }
+
+    .diff-card.others {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .diff-card.ours {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .diff-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .diff-card.others h3 {
+      color: #f87171;
+    }
+
+    .diff-card.ours h3 {
+      color: #34d399;
+    }
+
+    .diff-list {
+      list-style: none;
+    }
+
+    .diff-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: var(--gray-300);
+      font-size: 0.95rem;
+    }
+
+    .diff-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* Competitive */
+    .competitive-section {
+      padding: 80px 0;
+      background: var(--gray-900);
+    }
+
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 40px;
+    }
+
+    .comp-table th,
+    .comp-table td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--gray-700);
+    }
+
+    .comp-table th {
+      color: var(--gray-400);
+      font-weight: 500;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .comp-table td {
+      color: var(--gray-300);
+      font-size: 0.95rem;
+    }
+
+    .comp-table tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .comp-table td:first-child {
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    /* Regulatory */
+    .regulatory-section {
+      padding: 80px 0;
+      background: var(--dark);
+    }
+
+    .quote-block {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(14, 165, 233, 0.05) 100%);
+      border-left: 4px solid var(--primary);
+      padding: 32px 40px;
+      margin: 40px 0;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .quote-block p {
+      font-size: 1.15rem;
+      color: var(--gray-200);
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+
+    .quote-source {
+      font-size: 0.9rem;
+      color: var(--gray-500);
+      font-style: normal;
+    }
+
+    /* Demos */
+    .demos-section {
+      padding: 80px 0;
+      background: var(--gray-900);
+    }
+
+    .demos-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .demos-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .demo-card {
+      background: var(--dark);
+      border: 1px solid var(--gray-700);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .demo-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+    }
+
+    .demo-card h4 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .demo-card p {
+      color: var(--gray-400);
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 60px 0;
+      background: var(--dark);
+      border-top: 1px solid var(--gray-700);
+      text-align: center;
+    }
+
+    .footer-contact h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .footer-contact p {
+      color: var(--gray-400);
+      margin-bottom: 24px;
+    }
+
+    .footer-contact a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .footer-contact a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-note {
+      margin-top: 40px;
+      padding-top: 40px;
+      border-top: 1px solid var(--gray-800);
+      color: var(--gray-500);
+      font-size: 0.85rem;
+    }
+
+    /* Utility */
+    .highlight {
+      color: var(--primary);
+    }
+
+    .text-accent {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <span class="badge">Clinical AI Architecture</span>
+      <h1>Prompt Prism</h1>
+      <p class="subtitle">The LLM as relational medium — transmitting the clinician's approach, unique to each therapeutic relationship.</p>
+      <div class="cta-group">
+        <a href="https://huggingface.co/spaces/jostlebot/PromptPrism.Prototype" class="btn btn-primary" target="_blank">
+          View Prototype →
+        </a>
+        <a href="https://huggingface.co/spaces/jostlebot/TherapistsCoding.ARI" class="btn btn-secondary" target="_blank">
+          ARI Framework Demo
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="core-concept">
+    <div class="container">
+      <div class="concept-grid">
+        <div class="concept-text">
+          <h2>Just like a psychiatrist wouldn't prescribe the same medication to every patient...</h2>
+          <p>They shouldn't get the same AI tool either.</p>
+          <p>Prompt Prism generates a <strong>unique system prompt</strong> for every provider–patient pair. The AI speaks in the clinician's framework, reinforces skills the clinician actually taught, and closes every interaction by bridging back to the human relationship.</p>
+          <p><span class="highlight">Nothing reaches the patient without provider approval.</span> The LLM is a <em>relational medium</em> — not a third relationship, but a transmission layer for the primary one. Each provider's unique style and approach can be leveraged uniquely for each therapeutic relationship they hold.</p>
+        </div>
+        <div class="concept-visual">
+          <div class="analogy">
+            <div class="analogy-item">
+              <span class="analogy-label">Base layer</span>
+              <span class="analogy-value">Kitchen safety code — always on</span>
+            </div>
+            <div class="analogy-item">
+              <span class="analogy-label">Clinician layer</span>
+              <span class="analogy-value">The chef's style</span>
+            </div>
+            <div class="analogy-item">
+              <span class="analogy-label">Client layer</span>
+              <span class="analogy-value">Dietary needs</span>
+            </div>
+            <div class="analogy-item">
+              <span class="analogy-label">Session layer</span>
+              <span class="analogy-value">What happened at the last meal</span>
+            </div>
+            <div class="analogy-item">
+              <span class="analogy-label">Modules</span>
+              <span class="analogy-value">Dishes on the menu</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="layers-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Three Layers of Configuration</h2>
+        <p>Each layer adds specificity. Together, they create AI behavior that's clinically appropriate for this patient, with this provider, at this point in treatment.</p>
+      </div>
+      <div class="layers-grid">
+        <div class="layer-card foundation">
+          <span class="layer-number">Layer 1</span>
+          <h3>Foundation</h3>
+          <p>Safety floor that never changes. No one can turn it off.</p>
+          <ul class="layer-items">
+            <li>Never pretends to be a therapist</li>
+            <li>Never says "I'm here for you"</li>
+            <li>Crisis → immediate resources</li>
+            <li>Every interaction bridges to human</li>
+            <li>10-exchange limit (anti-dependency)</li>
+          </ul>
+        </div>
+        <div class="layer-card provider">
+          <span class="layer-number">Layer 2</span>
+          <h3>Provider Fingerprint</h3>
+          <p>How this psychiatrist practices. Their framework, their voice.</p>
+          <ul class="layer-items">
+            <li>DBT → skills, wise mind, distress tolerance</li>
+            <li>Psychodynamic → what's beneath, resistance</li>
+            <li>Trauma-informed → safety, pacing</li>
+            <li>Hard exclusions honored absolutely</li>
+          </ul>
+        </div>
+        <div class="layer-card patient">
+          <span class="layer-number">Layer 3</span>
+          <h3>Patient Profile</h3>
+          <p>This specific person. Their context, their patterns, their flags.</p>
+          <ul class="layer-items">
+            <li>Diagnosis, risk level, treatment stage</li>
+            <li>Cultural context, age-appropriate language</li>
+            <li>Custom flags ("I'm fine" = warning sign)</li>
+            <li>Module access controlled per-patient</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="modules-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Between-Session Modules</h2>
+        <p>The LLM as relational medium — each provider's unique style and approach flows through tools designed for each specific relationship.</p>
+      </div>
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-icon">🫁</div>
+          <h4>Grounding Toolkit</h4>
+          <p>Somatic regulation at 2am. Breathing, sensory anchoring — in the provider's language, reinforcing skills they actually taught.</p>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">📋</div>
+          <h4>Appointment Prep</h4>
+          <p>Organize what to bring up next session. Patient arrives prepared; provider walks in knowing what matters.</p>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">💊</div>
+          <h4>Medication Check-In</h4>
+          <p>Side effects, adherence, concerns — captured for the provider. No advice given. Data flows to the relationship.</p>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">💬</div>
+          <h4>Tend & Send</h4>
+          <p>NVC-informed communication building. Observations, feelings, needs, requests — then practice voicing it before the real conversation.</p>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">🌉</div>
+          <h4>Disclosure Bridging</h4>
+          <p>Help someone find words for what they haven't been able to say — to their provider, to someone else. Bridge to human relationship.</p>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">🧪</div>
+          <h4>Tolerate Space Lab</h4>
+          <p>Distress tolerance practice. Sit with discomfort, build capacity, expand the window. Safe container for building resilience.</p>
+        </div>
+        <div class="module-card" style="grid-column: span 2; background: rgba(99, 102, 241, 0.08); border-color: var(--primary);">
+          <div class="module-icon" style="background: rgba(99, 102, 241, 0.25);">🔧</div>
+          <h4>ARI Tool Builder</h4>
+          <p><strong>The co-creation layer.</strong> Providers don't just configure — they build. Mid-session insight becomes a custom tool: "This patient needs X." The provider designs it in their voice, for this relationship, deployed through the LLM. They're not building AI. They're building <em>their</em> tools, unique to each therapeutic relationship.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="diff-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>What Makes This Different</h2>
+        <p>Most AI mental health products are built AI-first. This is built the opposite way.</p>
+      </div>
+      <div class="diff-grid">
+        <div class="diff-card others">
+          <h3>Other AI Mental Health Tools</h3>
+          <ul class="diff-list">
+            <li>AI is the product; clinician bolted on later</li>
+            <li>Generic chatbot behavior</li>
+            <li>Optimized for engagement metrics</li>
+            <li>Creates a parallel relationship</li>
+            <li>Provider oversight is retrofitted</li>
+          </ul>
+        </div>
+        <div class="diff-card ours">
+          <h3>Prompt Prism</h3>
+          <ul class="diff-list">
+            <li>LLM as relational medium, not relationship</li>
+            <li>Unique configuration per provider–patient pair</li>
+            <li>Providers build custom tools for each relationship</li>
+            <li>Every interaction bridges to human care</li>
+            <li>Provider-in-the-loop from architecture up</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="competitive-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>The Competitive Landscape</h2>
+        <p>No major player has built provider-in-the-loop from the architecture up.</p>
+      </div>
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Approach</th>
+            <th>Gap</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Wysa, Woebot</td>
+            <td>Consumer wellness</td>
+            <td>No provider integration to add</td>
+          </tr>
+          <tr>
+            <td>ASH</td>
+            <td>AI therapist, engagement-optimized</td>
+            <td>Built provider-blind; retrofit required</td>
+          </tr>
+          <tr>
+            <td>Replika, Character.AI</td>
+            <td>Companionship</td>
+            <td>No clinical framework; adverse events documented</td>
+          </tr>
+          <tr>
+            <td>AI Scribes</td>
+            <td>Documentation only</td>
+            <td>Does not address between-session gap</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="regulatory-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>The FDA Tailwind</h2>
+        <p>The first products to clear regulatory scrutiny will be those with structural provider integration.</p>
+      </div>
+      <div class="quote-block">
+        <p>"Without a healthcare professional's oversight (human-in-the-loop)... generative AI devices could adversely affect a patient's mental health rather than lead to improvement."</p>
+        <span class="quote-source">— FDA Digital Health Advisory Committee, November 2025</span>
+      </div>
+      <p style="color: var(--gray-400); text-align: center;">Over 1,200 AI medical devices have been authorized. <strong style="color: var(--white);">Zero are for mental health treatment.</strong></p>
+    </div>
+  </section>
+
+  <section class="demos-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Interactive Prototypes</h2>
+        <p>See the architecture in action.</p>
+      </div>
+      <div class="demos-grid">
+        <a href="https://huggingface.co/spaces/jostlebot/PromptPrism.Prototype" target="_blank" class="demo-card">
+          <h4>Prompt Prism Prototype</h4>
+          <p>Experience how the system generates unique prompts based on provider orientation and patient context.</p>
+          <span class="btn btn-primary">Launch Demo →</span>
+        </a>
+        <a href="https://huggingface.co/spaces/jostlebot/TherapistsCoding.ARI" target="_blank" class="demo-card">
+          <h4>ARI Tool Builder</h4>
+          <p>See how providers can build custom tools — mid-session insights become between-session support, unique to each relationship.</p>
+          <span class="btn btn-primary">Launch Demo →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-contact">
+        <h3>Let's Build This Together</h3>
+        <p>Interested in exploring this architecture?</p>
+        <a href="mailto:jocelynskillmanlmhc@gmail.com">jocelynskillmanlmhc@gmail.com</a>
+      </div>
+      <div class="footer-note">
+        <p><strong>Jocelyn Skillman, LMHC</strong><br>Clinical AI Architecture — ARI Framework</p>
+        <p style="margin-top: 16px;">This is ideation-stage work. I'm excited to collaborate and follow your lead on where this goes.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
