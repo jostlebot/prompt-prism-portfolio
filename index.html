@@ -324,11 +324,15 @@
       border-radius: 12px;
       padding: 24px;
       transition: all 0.2s ease;
+      text-decoration: none;
+      display: block;
+      cursor: pointer;
     }
 
     .module-card:hover {
       border-color: var(--primary);
       background: rgba(99, 102, 241, 0.05);
+      transform: translateY(-2px);
     }
 
     .module-icon {
@@ -493,11 +497,17 @@
 
     .demos-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
+      .demos-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
       .demos-grid {
         grid-template-columns: 1fr;
       }
@@ -684,41 +694,41 @@
         <p>The LLM as relational medium — each provider's unique style and approach flows through tools designed for each specific relationship.</p>
       </div>
       <div class="modules-grid">
-        <div class="module-card">
+        <a href="https://huggingface.co/spaces/jostlebot/PracticeFields.Hub" target="_blank" class="module-card">
           <div class="module-icon">🫁</div>
           <h4>Grounding Toolkit</h4>
           <p>Somatic regulation at 2am. Breathing, sensory anchoring — in the provider's language, reinforcing skills they actually taught.</p>
-        </div>
-        <div class="module-card">
+        </a>
+        <a href="https://huggingface.co/spaces/jostlebot/PracticeFields.Hub" target="_blank" class="module-card">
           <div class="module-icon">📋</div>
           <h4>Appointment Prep</h4>
           <p>Organize what to bring up next session. Patient arrives prepared; provider walks in knowing what matters.</p>
-        </div>
-        <div class="module-card">
+        </a>
+        <a href="https://huggingface.co/spaces/jostlebot/PracticeFields.Hub" target="_blank" class="module-card">
           <div class="module-icon">💊</div>
           <h4>Medication Check-In</h4>
           <p>Side effects, adherence, concerns — captured for the provider. No advice given. Data flows to the relationship.</p>
-        </div>
-        <div class="module-card">
+        </a>
+        <a href="https://huggingface.co/spaces/jostlebot/PracticeFields.Hub" target="_blank" class="module-card">
           <div class="module-icon">💬</div>
           <h4>Tend & Send</h4>
           <p>NVC-informed communication building. Observations, feelings, needs, requests — then practice voicing it before the real conversation.</p>
-        </div>
-        <div class="module-card">
+        </a>
+        <a href="https://huggingface.co/spaces/jostlebot/PracticeFields.Hub" target="_blank" class="module-card">
           <div class="module-icon">🌉</div>
           <h4>Disclosure Bridging</h4>
           <p>Help someone find words for what they haven't been able to say — to their provider, to someone else. Bridge to human relationship.</p>
-        </div>
-        <div class="module-card">
+        </a>
+        <a href="https://huggingface.co/spaces/jostlebot/PracticeFields.Hub" target="_blank" class="module-card">
           <div class="module-icon">🧪</div>
           <h4>Tolerate Space Lab</h4>
           <p>Distress tolerance practice. Sit with discomfort, build capacity, expand the window. Safe container for building resilience.</p>
-        </div>
-        <div class="module-card" style="grid-column: span 2; background: rgba(99, 102, 241, 0.08); border-color: var(--primary);">
+        </a>
+        <a href="https://huggingface.co/spaces/jostlebot/TherapistsCoding.ARI" target="_blank" class="module-card" style="grid-column: span 2; background: rgba(99, 102, 241, 0.08); border-color: var(--primary);">
           <div class="module-icon" style="background: rgba(99, 102, 241, 0.25);">🔧</div>
           <h4>ARI Tool Builder</h4>
           <p><strong>The co-creation layer.</strong> Providers don't just configure — they build. Mid-session insight becomes a custom tool: "This patient needs X." The provider designs it in their voice, for this relationship, deployed through the LLM. They're not building AI. They're building <em>their</em> tools, unique to each therapeutic relationship.</p>
-        </div>
+        </a>
       </div>
     </div>
   </section>
@@ -823,6 +833,26 @@
         <a href="https://huggingface.co/spaces/jostlebot/TherapistsCoding.ARI" target="_blank" class="demo-card">
           <h4>ARI Tool Builder</h4>
           <p>See how providers can build custom tools — mid-session insights become between-session support, unique to each relationship.</p>
+          <span class="btn btn-primary">Launch Demo →</span>
+        </a>
+        <a href="https://huggingface.co/spaces/jostlebot/PracticeFields.Hub" target="_blank" class="demo-card">
+          <h4>Practice Fields Hub</h4>
+          <p>Curated therapeutic practice spaces — the between-session modules in action.</p>
+          <span class="btn btn-primary">Launch Demo →</span>
+        </a>
+        <a href="https://huggingface.co/spaces/jostlebot/DiagnosisExplorer" target="_blank" class="demo-card">
+          <h4>Diagnosis Explorer</h4>
+          <p>Understanding diagnoses with nuance — helping patients explore what their diagnosis means without pathologizing.</p>
+          <span class="btn btn-primary">Launch Demo →</span>
+        </a>
+        <a href="https://huggingface.co/spaces/jostlebot/PromptWork" target="_blank" class="demo-card">
+          <h4>PromptWork</h4>
+          <p>Assess chatbot prompts for trauma-informed design — evaluating AI safety before deployment.</p>
+          <span class="btn btn-primary">Launch Demo →</span>
+        </a>
+        <a href="https://huggingface.co/spaces/jostlebot/BuildABot.2" target="_blank" class="demo-card">
+          <h4>Build a Bot</h4>
+          <p>AI literacy through experimentation — see how prompts shape AI behavior.</p>
           <span class="btn btn-primary">Launch Demo →</span>
         </a>
       </div>
